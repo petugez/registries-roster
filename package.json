@@ -1,0 +1,30 @@
+{
+  "name": "registries-roster",
+  "version": "0.0.0",
+  "description": "Registries application",
+  "main": "build/server/server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sosik/registries"
+  },
+  "author": "Pavol Starek",
+  "dependencies": {
+    "async": "*",
+    "body-parser": "^1.4.3",
+    "errorhandler": "^1.1.1",
+    "cookie-parser": "^1.3.2",
+    "express": "^4.6.1",
+    "extend": "^1.3.0",
+    "mongodb": "^1.4.7",
+    "supervisor": "^0.6.0",
+    "swig": "^1.4.1",
+    "winston": "^0.7.3"
+  },
+  "devDependencies": {
+    "grunt-contrib-sass": "^0.7.3"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "start": "supervisor --watch 'build/' -- build/server/server.js"
+  }
+}

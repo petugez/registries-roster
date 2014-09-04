@@ -1,0 +1,11 @@
+node_modules/
+data
+data/
+build/
+bower_components/
+.project
+.sass-cache/
+.settings
+nbproject/
+local-config.js
+npm-debug.log
