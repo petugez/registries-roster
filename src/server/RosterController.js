@@ -76,8 +76,7 @@ var RosterController = function(mongoDriver) {
 		}
 		
 		async.parallel(toCall, function (err,callback){
-			console.log({seasons:seasons,competitions:competitions,clubs:clubs,rosters:rosters});
-			var page=renderService.render(renderModule.templates.SEARCH,{seasons:seasons,competitions:competitions,clubs:clubs,rosters:rosters});
+			var page=renderService.render(renderModule.templates.SEARCH,{seasons:seasons,competitions:competitions,clubs:clubs,rosters:rosters,selectedClub:clubId,selectedSeason:seasonId,selectedComp:compId});
 			res.send(200,page);
 		} );
 

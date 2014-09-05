@@ -41,7 +41,7 @@
 						<select name="season">
 							{% for season in seasons %}
 
-							<option value="{{season.id}}">{{season.baseData.name}}</option>
+							<option value="{{season.id}}"  {%if selectedSeason==season.id%} selected {%endif%}>{{season.baseData.name}}</option>
 
 							{% endfor %}
 
@@ -51,7 +51,7 @@
 						<span>súťaž</span>
 						<select name="comp">
 								{% for competition in competitions %}
-							<option value="{{competition.id}}">{{competition.baseData.name}}</option>
+							<option value="{{competition.id}}" {%if selectedComp==competition.id%} selected {%endif%}>{{competition.baseData.name}}</option>
 							{% endfor %}
 						</select>
 					</label>
@@ -59,7 +59,7 @@
 						<span>klub</span>
 						<select name="club">
 							{% for club in clubs %}
-							<option value="{{club.id}}">{{club.club.name}}</option>
+							<option value="{{club.id}}" {%if selectedClub==club.id%} selected {%endif%}>{{club.club.name}}</option>
 							{% endfor %}
 						</select>
 					</label>
