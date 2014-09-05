@@ -15,49 +15,46 @@
 	<meta name="copyright" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="shortcut icon" href="./img/favicon.ico" />
-	<link rel="stylesheet" href="css/reset.css" />
-	<link rel="stylesheet" href="css/main.css" />
+	<link rel="shortcut icon" href="/img/favicon.ico" />
+	<link rel="stylesheet" href="/css/reset.css" />
+	<link rel="stylesheet" href="/css/main.css" />
 	
 
-	<!-- Required for non-UTF encodings -->
-	<script src="lib/text-encoding/lib/encoding-indexes.js"></script>
-	<script src="lib/text-encoding/lib/encoding.js"></script>
 
 </head>
 	<body>
 		<div id="main-wrapper">
 			<header>
-				<img src="./img/logo.jpg" alt="SLOVENSKÁ VOLEJBALOVÁ FEDERÁCIA" />
+				<img src="/img/logo.jpg" alt="SLOVENSKÁ VOLEJBALOVÁ FEDERÁCIA" />
 				<span>
 					SLOVENSKÁ VOLEJBALOVÁ<br>FEDERÁCIA
 				</span>
 			</header>
-			<table class="detail">
+			<table class="detail" style="height: 100%">
 				<tr>
 					<td class="detail-base">
 						<h3>ÚDAJE O SÚPISKE</h3>
 						<table>
 							<tr>
-								<th>Názov súpisky</th><td>SÚPISKA DRUŽSTVA - 2012 / 2013</td>
+								<th>Názov súpisky</th><td>{{roster.prName}} - {{ roster.season}}</td>
 							</tr>
 							<tr>
-								<th>Marketingový názov družstva</th><td>Volley Team UNICEF Bratislava</td>
+								<th>Marketingový názov družstva</th><td>{{roster.prName}}</td>
 							</tr>
 							<tr>
-								<th>Klub</th><td>Volley Team UNICEF Bratislava</td>
+								<th>Klub</th><td>{{roster.club}}</td>
 							</tr>
 							<tr>
-								<th>Súťaž</th><td>Extraliga muži</td>
+								<th>Súťaž</th><td>{{roster.competition}}</td>
 							</tr>
 							<tr>
-								<th>Obdobie</th><td>2012 / 2013</td>
+								<th>Obdobie</th><td>{{roster.season}}</td>
 							</tr>
 							<tr>
-								<th>Kategória</th><td>muži</td>
+								<th>Kategória</th><td>{{roster.category}}</td>
 							</tr>
 							<tr>
-								<th>Dátum poslednej modifikácie</th><td>31.05.2013</td>
+								<th>Dátum poslednej modifikácie</th><td>{{roster.lastModification}}</td>
 							</tr>
 						</table>
 					</td>
@@ -65,35 +62,52 @@
 						<h3>TRÉNERY</h3>
 						<table>
 							<tr>
-								<th>Tréner</th><td>Maličký Marekasfa sfas fasfsafas</td>
+								<th>Tréner</th><td>{{roster.coach.name}}</td>
 							</tr>
 							<tr>
-								<th></th><td>Licencia: 82/IV.</td>
+								<th></th><td>{{roster.coach.license}} </td>
+							</tr>
+							{%if roster.assistant1 %}
+							<tr>
+								<th>Asistent Trénera</th><td>{{roster.assistant1.name}} </td>
 							</tr>
 							<tr>
-								<th>Asistent Trénera</th><td>Pistovič Branko</td>
+								<th></th><td>{{roster.assistant1.license}}</td>
+							</tr>
+							{% endif %}
+							{%if roster.assistant2 %}
+							<tr>
+								<th>Asistent Trénera</th><td>{{roster.assistant2.name}} </td>
 							</tr>
 							<tr>
-								<th></th><td>Licencia: 140/I.</td>
+								<th></th><td>{{roster.assistant2.license}}</td>
+							</tr>
+							{% endif %}
+							{%if roster.assistant3 %}
+							<tr>
+								<th>Asistent Trénera</th><td>{{roster.assistant3.name}} </td>
 							</tr>
 							<tr>
-								<th>Asistent Trénera</th><td>Pistovič Branko</td>
+								<th></th><td>{{roster.assistant3.license}}</td>
+							</tr>
+							{% endif %}
+							{%if roster.assistant4 %}
+							<tr>
+								<th>Asistent Trénera</th><td>{{roster.assistant4.name}} </td>
 							</tr>
 							<tr>
-								<th></th><td>Licencia: 140/I.</td>
+								<th></th><td>{{roster.assistant4.license}}</td>
+							</tr>
+							{% endif %}
+							{%if roster.assistant5 %}
+							<tr>
+								<th>Asistent Trénera</th><td>{{roster.assistant5.name}}</td>
 							</tr>
 							<tr>
-								<th>Asistent Trénera</th><td>Pistovič Branko</td>
+								<th></th><td>{{roster.assistant5.license}}</td>
 							</tr>
-							<tr>
-								<th></th><td>Licencia: 140/I.</td>
-							</tr>
-							<tr>
-								<th>Asistent Trénera</th><td>Pistovič Branko</td>
-							</tr>
-							<tr>
-								<th></th><td>Licencia: 140/I.</td>
-							</tr>
+							{% endif %}
+
 						</table>
 					</td>
 				</tr>
@@ -112,244 +126,27 @@
 								</tr>
 							</thead>
 							<tbody>
+							
+							{% for player in roster.players %}
 								<tr>
-									<td>1.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
+									<td>{{loop.index}}</td>
+									<td>{{player.surName}}</td>
+									<td>{{player.name}}</td>
+									<td>{{player.license}}</td>
+									<td>{{player.birthDate}}</td>
+									<td>{{NA}}</td>
 								</tr>
-								<tr>
-									<td>2.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>3.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>4.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>5.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>6.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>7.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>8.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>9.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>10.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>11.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>12.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>13.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>14.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>15.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>16.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>17.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>18.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>19.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>20.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>21.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>22.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>23.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>24.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>25.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>26.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>27.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>28.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12703</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
-								<tr>
-									<td>29.</td>
-									<td>KAULIAKAMOA JR.</td>
-									<td>Joseph</td>
-									<td>12i03</td>
-									<td>10.12.1979</td>
-									<td>T 15.05.2013</td>
-								</tr>
+							{% endfor %}
 								
 							</tbody>
 						</table>
 					</td>
 				</tr>
 			</table>
+			
+			<div style="position: absolute;bottom: 0;font-size: 9px">
+				hash: {{hash}}
+			</div>
 		</div>
 	</body>
 </html>

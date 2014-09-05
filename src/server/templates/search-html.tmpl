@@ -33,25 +33,34 @@
 					SLOVENSKÁ VOLEJBALOVÁ<br>FEDERÁCIA
 				</span>
 			</header>
-			<form>
+			<form method="get">
 				<fieldset>
 					<h3>Vyhľadávanie súpisiek</h3>
 					<label>
-						<span>obdobie</span>
-						<select>
-							<option>Test</option>
+						<span>Ročník sutaže</span>
+						<select name="season">
+							{% for season in seasons %}
+
+							<option value="{{season.id}}">{{season.baseData.name}}</option>
+
+							{% endfor %}
+
 						</select>
 					</label>
 					<label>
 						<span>súťaž</span>
-						<select>
-							<option>Test</option>
+						<select name="comp">
+								{% for competition in competitions %}
+							<option value="{{competition.id}}">{{competition.baseData.name}}</option>
+							{% endfor %}
 						</select>
 					</label>
 					<label>
 						<span>klub</span>
-						<select>
-							<option>Test</option>
+						<select name="club">
+							{% for club in clubs %}
+							<option value="{{club.id}}">{{club.club.name}}</option>
+							{% endfor %}
 						</select>
 					</label>
 					<label>
@@ -61,57 +70,38 @@
 				
 			</form>
 			
+			{%if rosters %}
 			<div>
 				<h3>Výsledok vyhľadávania</h3>
 				<table class="result">
 					<thead>
 						<tr>
-							<th>column 1</th>
-							<th>column 2</th>
-							<th>column 3</th>
-							<th>column 4</th>
-							<th>column 5</th>
+							<th>Marketingový názov družstva</th>
+							<th>Klub</th>
+							<th>S.ročník</th>
+							<th>Sútaž</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
+					
+					
+
+					{% for roster in rosters %}
 						<tr>
-							<td>column 1</td>
-							<td>column 2</td>
-							<td>column 3</td>
-							<td>column 4</td>
-							<td><a href="#">detail</a></td>
+							<td>{{roster.baseData.prName}}</td>
+							<td>{{roster.baseData.club.refData.name}}</td>
+							<td>{{roster.baseData.season.refData.name}}</td>
+							<td>{{roster.baseData.competition.refData.name}}</td>
+							<td><a href="/roster/{{roster.id}}">detail</a></td>
 						</tr>
-						<tr>
-							<td>column 1</td>
-							<td>column 2</td>
-							<td>column 3</td>
-							<td>column 4</td>
-							<td><a href="#">detail</a></td>
-						</tr>
-						<tr>
-							<td>column 1</td>
-							<td>column 2</td>
-							<td>column 3</td>
-							<td>column 4</td>
-							<td><a href="#">detail</a></td>
-						</tr>
-						<tr>
-							<td>column 1</td>
-							<td>column 2</td>
-							<td>column 3</td>
-							<td>column 4</td>
-							<td><a href="#">detail</a></td>
-						</tr>
-						<tr>
-							<td>column 1</td>
-							<td>column 2</td>
-							<td>column 3</td>
-							<td>column 4</td>
-							<td><a href="#">detail</a></td>
-						</tr>
+					{% endfor %}
+
+						
 					</tbody>
 				</table>
 			</div>
+			{% endif %}
 		</div>
 	</body>
 </html>
