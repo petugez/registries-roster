@@ -99,27 +99,27 @@ var RosterController = function(mongoDriver) {
 				toCall.push(function(callback){ seasonDao.get(data.baseData.season.oid,function(err,data){ if (err) {callback(err);return } roster.season=data.baseData.name;callback(); });} );
 				toCall.push(function(callback){ competitionDao.get(data.baseData.competition.oid,function(err,data){ if (err) {callback(err);return } roster.competition=data.baseData.name;callback(); });} );
 
-				toCall.push(function(callback){ peopleDao.get(data.coaches.coach.oid,function(err,data){ if (err) {callback(err);return } roster.coach={}; roster.coach.name=data.baseData.surName + ' '+ data.baseData.name; roster.coach.license=data.coach.coachLicense+' / '+ data.coach.coachLicenseType ;callback(); });} );
+				toCall.push(function(callback){ peopleDao.get(data.coaches.coach.oid,function(err,data){ if (err) {callback(err);return } roster.coach={}; roster.coach.name=data.baseData.surName + ' '+ data.baseData.name; roster.coach.license=((data.coach && data.coach.coachLicense) || ' ') +' / '+ ((data.coach && data.coach.coachLicenseType) || ' ') ;callback(); });} );
 
 				
 				if (data.coaches.aCoach1.oid){
-					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach1.oid,function(err,data){ if (err) {callback(err);return }  roster.assistant1={}; roster.assistant1.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant1.license=data.coach.coachLicense+' / '+ data.coach.coachLicenseType  ;callback(); });} );
+					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach1.oid,function(err,data){ if (err) {callback(err);return }  roster.assistant1={}; roster.assistant1.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant1.license=((data.coach && data.coach.coachLicense) || ' ') +' / '+ ((data.coach && data.coach.coachLicenseType) || ' ')  ;callback(); });} );
 				}
 
 				if (data.coaches.aCoach2.oid){
-					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach2.oid,function(err,data){ if (err) {callback(err);return } roster.assistant2={};roster.assistant2.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant2.license=data.coach.coachLicense+' / '+ data.coach.coachLicenseType ;callback(); });} );
+					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach2.oid,function(err,data){ if (err) {callback(err);return } roster.assistant2={};roster.assistant2.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant2.license=((data.coach && data.coach.coachLicense) || ' ') +' / '+ ((data.coach && data.coach.coachLicenseType) || ' ') ;callback(); });} );
 				}
 
 				if (data.coaches.aCoach3.oid){
-					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach3.oid,function(err,data){ if (err) {callback(err);return } roster.assistant3={};roster.assistant3.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant3.license=data.coach.coachLicense+' / '+ data.coach.coachLicenseType ;callback(); });} );
+					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach3.oid,function(err,data){ if (err) {callback(err);return } roster.assistant3={};roster.assistant3.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant3.license=((data.coach && data.coach.coachLicense) || '') +' / '+ ((data.coach && data.coach.coachLicenseType) || '') ;callback(); });} );
 				}
 
 				if (data.coaches.aCoach4.oid){
-					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach4.oid,function(err,data){ if (err) {callback(err);return } roster.assistant4={};roster.assistant4.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant4.license=data.coach.coachLicense+' / '+ data.coach.coachLicenseType ;callback(); });} );
+					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach4.oid,function(err,data){ if (err) {callback(err);return } roster.assistant4={};roster.assistant4.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant4.license=((data.coach && data.coach.coachLicense) || '') +' / '+ ((data.coach && data.coach.coachLicenseType) || ' ') ;callback(); });} );
 				}
 
 				if (data.coaches.aCoach5.oid){
-					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach5.oid,function(err,data){ if (err) {callback(err);return } roster.assistant5={};roster.assistant5.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant5.license=data.coach.coachLicense+' / '+ data.coach.coachLicenseType ;callback(); });} );
+					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach5.oid,function(err,data){ if (err) {callback(err);return } roster.assistant5={};roster.assistant5.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant5.license=((data.coach && data.coach.coachLicense) || ' ') +' / '+ ((data.coach && data.coach.coachLicenseType) || ' ') ;callback(); });} );
 				}
 
 				
