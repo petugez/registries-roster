@@ -38,6 +38,11 @@ var RosterController = function(mongoDriver) {
 			{collectionName: "organizations"}
 	);
 
+	var transferDao = new universalDaoModule.UniversalDao(
+			mongoDriver,
+			{collectionName: "transfers"}
+	);
+
 	var that=this;
 	this.mongoDriver=mongoDriver;
 
@@ -131,9 +136,27 @@ var RosterController = function(mongoDriver) {
 					item.id=index++;
 					toCall.push(function(callback){  peopleDao.get(item.oid,function(err,data){
 						if (err) {callback(err);return } 
-						var player={surName:data.baseData.surName,name: data.baseData.name,birthDate: data.baseData.birthDate , license: data.player.playerLicense}; 
+						var player={surName:data.baseData.surName,name: data.baseData.name,birthDate: convertDate(data.baseData.birthDate), license: data.player.playerLicense}; 
 						players[item.id]= player;
-						callback(); 
+						var pqf = QueryFilter.create();
+						
+						pqf.addCriterium('baseData.player.oid', 'eq', data.id);
+						pqf.addCriterium('baseData.stateOfTransfer', 'eq', 'schválený');
+						(function(localPlayer, callback) {
+							transferDao.list(pqf, function(err, data) {
+								if (err) {
+									callback(err);
+								}
+								
+								console.log('DATA', data);
+								if (data && data.length > 0) {
+								localPlayer.note = (data[0].baseData.typeOfTransfer || '') + ':' + (convertDate(data[0].baseData.dateTo) || '') ;
+								} else {
+									localPlayer.note = '';
+								}
+								callback();
+							});
+						})(player, callback);
 					});
 				} );	
 				});
