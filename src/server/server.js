@@ -28,7 +28,7 @@ mongoDriver.init(config.mongoDbURI, function(err) {
 	}
 
 	var roster= new rosterControllerModule.RosterController(mongoDriver);
-	
+
 	app.get('/', function(req, res) {res.redirect('/search')});
 	app.get('/search', function (req,res){roster.search(req,res)});
 	app.get('/roster/:id', bodyParser.json(), function(req, res){roster.roster(req, res);});
@@ -43,7 +43,7 @@ mongoDriver.init(config.mongoDbURI, function(err) {
 	
 	log.verbose('Configuring photos sub applicaction');
 
-	if (process.env.REGISTRIES_PRODUCTION) {
+	if (process.env.REGISTRIES_PRODUCTION || true) {
 		// We are in production environment, use only http port
 
 		var port = config.webserverPort;
