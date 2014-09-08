@@ -42,6 +42,12 @@ var RosterController = function(mongoDriver) {
 			mongoDriver,
 			{collectionName: "transfers"}
 	);
+	
+	var ageCategoryDao = new universalDaoModule.UniversalDao(
+			mongoDriver,
+			{collectionName: "ageCategories"}
+	);
+
 
 	var that=this;
 	this.mongoDriver=mongoDriver;
@@ -106,6 +112,8 @@ var RosterController = function(mongoDriver) {
 
 				toCall.push(function(callback){ peopleDao.get(data.coaches.coach.oid,function(err,data){ if (err) {callback(err);return } roster.coach={}; roster.coach.name=data.baseData.surName + ' '+ data.baseData.name; roster.coach.license=((data.coach && data.coach.coachLicense) || ' ') +' / '+ ((data.coach && data.coach.coachLicenseType) || ' ') ;callback(); });} );
 
+				toCall.push(function(callback){ ageCategoryDao.get(data.baseData.ageCategory.oid,function(err,data){ if (err) {callback(err);return } roster.category=data.baseData.name;;callback(); });} );
+
 				
 				if (data.coaches.aCoach1.oid){
 					toCall.push(function(callback){ peopleDao.get(data.coaches.aCoach1.oid,function(err,data){ if (err) {callback(err);return }  roster.assistant1={}; roster.assistant1.name=data.baseData.surName + ' '+ data.baseData.name;roster.assistant1.license=((data.coach && data.coach.coachLicense) || ' ') +' / '+ ((data.coach && data.coach.coachLicenseType) || ' ')  ;callback(); });} );
@@ -164,10 +172,10 @@ var RosterController = function(mongoDriver) {
 
 				async.parallel(toCall, function (err,callback){
 						if (data.baseData.gender=='M'){
-							roster.category='Muži';
+							roster.gender='Muži';
 						}
 						else {
-							roster.category='Ženy';
+							roster.gender='Ženy';
 						}
 						roster.players=players;
 
