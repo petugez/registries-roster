@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	
 	
-	grunt.registerTask('build:server', [ 'copy:server','copy:templates','copy:sharedJsServer','copy:ssl','copy:css','copy:img']);
+	grunt.registerTask('build:server', [ 'copy:server','copy:templates','copy:sharedJsServer','copy:ssl','copy:css','copy:img','copy:font']);
 	
 	grunt.registerTask('build', [ 'build:server']);
 
@@ -45,7 +45,12 @@ module.exports = function(grunt) {
 					{expand: true, cwd: 'src/client/img', src: ['**'], dest: 'build/client/img'}
 				]
 			},
-			
+			font: {
+                                files: [
+                                        {expand: true, cwd: 'src/client/font', src: ['**'], dest: 'build/client/font'}
+                                ]
+                        },
+	
 		
 			sharedJsServer: {
 				files: [
